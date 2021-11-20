@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.savinoordine.sp.R
 import com.savinoordine.sp.databinding.ListFragmentBinding
-import com.savinoordine.sp.domain.BeerLight
 import com.savinoordine.sp.domain.BeerExtra
+import com.savinoordine.sp.domain.BeerLight
 import com.savinoordine.sp.ui.detail.DetailFragment
 import com.savinoordine.sp.ui.list.adapter.BeerLightAdapter
 import com.savinoordine.sp.ui.list.adapter.BeerTagAdapter
@@ -82,6 +82,7 @@ class ListFragment : Fragment(R.layout.list_fragment) {
         val modalBottomSheet = DetailFragment()
         modalBottomSheet.arguments = bundle
         modalBottomSheet.show(childFragmentManager, DetailFragment.TAG)
+        binding.searchBeer.clearFocus()
     }
 
     private fun onTagClick(tag: String) {
@@ -124,10 +125,6 @@ class ListFragment : Fragment(R.layout.list_fragment) {
     }
 
     private fun ListFragmentBinding.initSearchView() {
-        searchBeer.setOnCloseListener {
-            viewModel.cleanFilter()
-            true
-        }
         searchBeer.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false

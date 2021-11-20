@@ -77,11 +77,11 @@ constructor(
     fun filterBy(word: String) {
         _filterWord = word
         if (word.isEmpty()) {
-            cleanFilter()
+            _filterBeers = null
         } else {
             filterBeers()
-            success()
         }
+        success()
     }
 
     // this method begin filtering the beers from the "already searched beers", if no match, auto search new beers
@@ -96,11 +96,6 @@ constructor(
                 autoSearchBeers()
             }
         }
-    }
-
-    fun cleanFilter() {
-        _filterBeers = null
-        success()
     }
 
     private fun success() = viewModelScope.launch {
