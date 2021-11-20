@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    style="@style/Widget.Sp.SelectableEffect">
+
+    <TextView
+        android:id="@+id/beerTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/material_half"
+        android:background="@drawable/bkg_orange_rounded"
+        android:gravity="center"
+        android:paddingStart="@dimen/material_double"
+        android:paddingTop="@dimen/material_single"
+        android:paddingEnd="@dimen/material_double"
+        android:paddingBottom="@dimen/material_single"
+        tools:text="Ale" />
+
+</FrameLayout>

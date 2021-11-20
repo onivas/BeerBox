@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        tools:context=".ui.detail.DetailFragment">
+
+        <ImageView
+            android:id="@+id/detailImage"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_margin="@dimen/material_single"
+            app:layout_constraintEnd_toStartOf="@+id/imageGuideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_bookmark_24"
+            app:layout_constraintStart_toEndOf="@id/endGuideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/imageGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/endGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/material_half"
+            android:textColor="@color/white"
+            android:textSize="@dimen/material_triple_sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/endGuideline"
+            app:layout_constraintStart_toStartOf="@+id/imageGuideline"
+            app:layout_constraintTop_toBottomOf="@id/imageGuideline"
+            tools:text="Name" />
+
+        <TextView
+            android:id="@+id/alcohol"
+            style="@style/Widget.Sp.TextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_single"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/detailImage"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/detailImage"
+            app:layout_constraintTop_toBottomOf="@+id/detailImage"
+            tools:text="2.6" />
+
+        <TextView
+            android:id="@+id/tagline"
+            style="@style/Widget.Sp.TextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/material_half"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageGuideline"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            tools:text="tagline" />
+
+        <TextView
+            android:id="@+id/description"
+            style="@style/Widget.Sp.TextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/material_half"
+            android:layout_marginTop="@dimen/material_half"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageGuideline"
+            app:layout_constraintTop_toBottomOf="@id/tagline"
+            tools:text="description description description description description description description description " />
+
+        <TextView
+            android:id="@+id/brewTips"
+            style="@style/Widget.Sp.TextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_single"
+            android:layout_marginStart="@dimen/material_half"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageGuideline"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            tools:text="tips" />
+
+        <TextView
+            android:id="@+id/ingredient"
+            style="@style/Widget.Sp.TextView"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/material_single"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/material_half"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageGuideline"
+            app:layout_constraintTop_toBottomOf="@id/brewTips"
+            tools:text="ingredient" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:indicatorColor="?attr/colorSecondary"
+            app:layout_constraintBottom_toBottomOf="@+id/detailImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/contentGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="detailImage,name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.list.ListFragment">
+
+    <include
+        android:id="@+id/offerBanner"
+        layout="@layout/include_offer_banner"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_margin="@dimen/material_single"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchBeer" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tagRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/material_60dp"
+        android:layout_marginStart="@dimen/material_single"
+        android:layout_marginEnd="@dimen/material_single"
+        android:orientation="horizontal"
+        android:overScrollMode="ifContentScrolls"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/offerBanner"
+        tools:itemCount="6"
+        tools:listitem="@layout/beer_tag_item"
+        tools:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/beerRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:overScrollMode="ifContentScrolls"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tagRecyclerView"
+        tools:itemCount="6"
+        tools:listitem="@layout/beer_list_item"
+        tools:visibility="visible" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="?attr/colorSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/reloadListBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/material_double"
+        android:src="@drawable/ic_baseline_refresh_24"
+        android:text="@string/reload"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible" />
+
+    <SearchView
+        android:id="@+id/searchBeer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/material_single"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/search"
+        android:searchIcon="@drawable/ic_baseline_search_24"
+        android:theme="@style/Widget.Sp.SearchView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/contentGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="beerRecyclerView,offerBanner,tagRecyclerView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

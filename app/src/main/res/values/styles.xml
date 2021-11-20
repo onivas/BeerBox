@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.Sp.TextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Widget.Sp.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="behavior_skipCollapsed">true</item>
+        <item name="behavior_fitToContents">true</item>
+        <item name="behavior_peekHeight">220dp</item>
+        <item name="behavior_hideable">true</item>
+    </style>
+
+    <style name="Widget.Sp.SearchView" parent="">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:textColorPrimary">@color/grey</item>
+        <item name="android:background">@drawable/bkg_darkgrey_rounded</item>
+    </style>
+
+    <style name="Widget.Sp.SelectableEffect" parent="">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+</resources>

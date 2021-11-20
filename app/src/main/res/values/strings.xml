@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Satispay Test</string>
+    <string name="beers">Beer Box</string>
+    <string name="item_detail">Item Detail</string>
+    <string name="bad_request_message">Bad network request</string>
+    <string name="generic_error_message">Ops beer error. Please reload!</string>
+    <string name="reload">Reload</string>
+    <string name="more_info">MORE INFO</string>
+    <string name="weekend_offers">Weekend Offers</string>
+    <string name="free_shipping">Free shipping on orders over 60€</string>
+    <string name="ingredients">Ingredients:\nYeast: %1$s\nHops: %2$s Malt: %3$s</string>
+    <string name="alcohol">%1$s %%</string>
+    <string name="search">Search</string>
+</resources>

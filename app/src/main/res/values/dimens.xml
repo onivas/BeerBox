@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="material_half">4dp</dimen>
+    <dimen name="material_single">8dp</dimen>
+    <dimen name="material_double">16dp</dimen>
+    <dimen name="material_triple">24dp</dimen>
+    <dimen name="material_60dp">60dp</dimen>
+
+    <dimen name="material_triple_sp">24sp</dimen>
+</resources>
