@@ -1,6 +1,5 @@
 package com.savinoordine.sp.ui.list
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.savinoordine.sp.domain.BeerLight
 import com.savinoordine.sp.repository.BeerRepository
@@ -36,13 +35,11 @@ constructor(
             if (_lastBeers != newBeers) {
                 _autoSearchEnable = true
                 _lastBeers = newBeers
+                _filterWord?.let { filterBeers() } ?: run { success() }
             } else {
                 _autoSearchEnable = false  // disable auto-search because no more beer are available
+                success()
             }
-
-//            Log.d(">>>", "${newBeers.size} ${_lastBeers.size}")
-            _filterWord?.let { filterBeers() }
-            success()
         }
     }
 
@@ -77,10 +74,10 @@ constructor(
         _filterWord = word
         if (word.isEmpty()) {
             _filterBeers = null
+            success()
         } else {
             filterBeers()
         }
-        success()
     }
 
     // this method begin filtering the beers from the "already searched beers", if no match, auto search new beers
@@ -92,23 +89,32 @@ constructor(
                         it.name.contains(word, true)
             }
             if (currentFilteredBeer.isNullOrEmpty() || _filterBeers.isNullOrEmpty() || currentFilteredBeer == _filterBeers) {
+                filtering()
                 autoSearchBeers()
+            } else{
+                success()
             }
         }
     }
 
+    private fun filtering() = viewModelScope.launch {
+        _state.value = ListState.AutoSearching(_beerRepository.beers.value, _filterBeers, _filterWord)
+    }
+
     private fun success() = viewModelScope.launch {
-        _state.value = ListState.Success(
-            _beerRepository.beers.value,
-            _filterBeers,
-            _filterWord
-        )
+        _state.value = ListState.Success(_beerRepository.beers.value, _filterBeers, _filterWord)
     }
 }
 
 sealed class ListState {
     object Loading : ListState()
     data class Success(
+        val beers: List<BeerLight>?,
+        val filteredBeer: List<BeerLight>?,
+        val filteredWord: String?
+    ) : ListState()
+
+    data class AutoSearching(
         val beers: List<BeerLight>?,
         val filteredBeer: List<BeerLight>?,
         val filteredWord: String?

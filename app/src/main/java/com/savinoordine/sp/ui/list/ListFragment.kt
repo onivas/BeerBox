@@ -51,7 +51,8 @@ class ListFragment : Fragment(R.layout.list_fragment) {
     private fun ListFragmentBinding.observingViewModelState() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is ListState.Success -> handleSuccess(state.beers, state.filteredBeer)
+                is ListState.Success -> handleSuccess(state.beers, state.filteredBeer, true)
+                is ListState.AutoSearching -> handleSuccess(state.beers, state.filteredBeer, false)
                 is ListState.Error -> handleError(state.error)
                 is ListState.Loading -> handleLoading()
             }
@@ -60,10 +61,11 @@ class ListFragment : Fragment(R.layout.list_fragment) {
 
     private fun ListFragmentBinding.handleSuccess(
         beers: List<BeerLight>?,
-        filteredBeer: List<BeerLight>?
+        filteredBeer: List<BeerLight>?,
+        hideLoading: Boolean,
     ) {
         beerRecyclerView.castAdapterTo<BeerLightAdapter>().submitList(filteredBeer ?: beers)
-        progress.gone()
+        hideLoading.takeIf { it }?.apply { progress.gone() }
         reloadListBtn.gone()
         contentGroup.visible()
     }
