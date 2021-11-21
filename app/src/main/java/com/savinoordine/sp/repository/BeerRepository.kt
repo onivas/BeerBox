@@ -7,6 +7,6 @@ import com.savinoordine.sp.util.network.ResultOf
 
 interface BeerRepository {
     val beers: LiveData<List<BeerLight>>
-    suspend fun getBeers(page: Int): ResultOf<List<BeerLight>>
+    suspend fun getBeers(): ResultOf<List<BeerLight>>
     suspend fun getBeerDetail(id: Int): ResultOf<Beer>
 }

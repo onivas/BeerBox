@@ -1,5 +1,6 @@
 package com.savinoordine.sp.ui.list
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.savinoordine.sp.domain.BeerLight
 import com.savinoordine.sp.repository.BeerRepository
@@ -22,9 +23,8 @@ constructor(
 
     private var _lastBeers = emptyList<BeerLight>()
     private var _filterBeers: List<BeerLight>? = null
-    private var _searchingPage = 1
     private var _filterWord: String? = null
-    private var autoSearchEnable = true
+    private var _autoSearchEnable = true
 
     init {
         loadBeers()
@@ -34,14 +34,13 @@ constructor(
     private fun observeBeers() {
         _beerRepository.beers.observeForever { newBeers ->
             if (_lastBeers != newBeers) {
-                autoSearchEnable = true
+                _autoSearchEnable = true
                 _lastBeers = newBeers
-                _searchingPage =
-                    _searchingPage.inc().takeIf { newBeers.isNotEmpty() } ?: _searchingPage
             } else {
-                autoSearchEnable = false  // disable auto-search because no more beer are available
+                _autoSearchEnable = false  // disable auto-search because no more beer are available
             }
 
+//            Log.d(">>>", "${newBeers.size} ${_lastBeers.size}")
             _filterWord?.let { filterBeers() }
             success()
         }
@@ -50,15 +49,15 @@ constructor(
     // this method is called if during a filtered search, user has no results
     private fun autoSearchBeers() = viewModelScope.launch {
         delay(200)  // small delay for a smooth autosearch
-        autoSearchEnable.takeIf { it }?.apply { tryLoadingMoreBeers() }
+        _autoSearchEnable.takeIf { it }?.apply { tryLoadingMoreBeers() }
     }
 
     fun loadBeers() = viewModelScope.launch {
-        if (autoSearchEnable) { // avoid call because last success api call return no more beer available
+        if (_autoSearchEnable) { // avoid call because last success api call return no more beer available
             _state.value = ListState.Loading
-            _beerRepository.getBeers(_searchingPage)
+            _beerRepository.getBeers()
                 .onError {
-                    autoSearchEnable = true
+                    _autoSearchEnable = true
                     _state.value = ListState.Error(it)
                 }
         }
@@ -92,7 +91,7 @@ constructor(
                 it.description.contains(word, true) ||
                         it.name.contains(word, true)
             }
-            if (currentFilteredBeer.isNullOrEmpty() || currentFilteredBeer == _filterBeers || _filterBeers.isNullOrEmpty()) {
+            if (currentFilteredBeer.isNullOrEmpty() || _filterBeers.isNullOrEmpty() || currentFilteredBeer == _filterBeers) {
                 autoSearchBeers()
             }
         }
@@ -102,8 +101,7 @@ constructor(
         _state.value = ListState.Success(
             _beerRepository.beers.value,
             _filterBeers,
-            _filterWord,
-            _searchingPage
+            _filterWord
         )
     }
 }
@@ -113,8 +111,7 @@ sealed class ListState {
     data class Success(
         val beers: List<BeerLight>?,
         val filteredBeer: List<BeerLight>?,
-        val filteredWord: String?,
-        val nextPage: Int
+        val filteredWord: String?
     ) : ListState()
 
     object Idle : ListState()

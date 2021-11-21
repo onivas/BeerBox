@@ -42,7 +42,7 @@ class BeerApiClientImplTest {
     @Test
     fun `Beer list API mapping`() = coroutinesTestRule.runBlockingTest {
         coEvery { beerApiClient.getBeers(1) }.returns(DataSourceMock.networkBeersLightModel.success())
-        apiClient.getBeers(1)
+        apiClient.getBeers()
         assertEquals(DataSourceMock.domainBeers, apiClient.beers.value)
     }
 }

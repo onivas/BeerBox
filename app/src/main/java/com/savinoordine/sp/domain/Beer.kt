@@ -21,6 +21,6 @@ const val NO_VALUE = -1.0
 class BeerExtra {
     companion object{
         val tags =
-            listOf("Blonde", "Lager", "Ale", "Dark", "French", "Belgian", "Fruit", "Saison", "Bitter")
+            listOf("Blonde", "Lager", "Ale", "Dark", "Italian", "French", "Belgian", "Fruit", "Saison", "Bitter")
     }
 }
